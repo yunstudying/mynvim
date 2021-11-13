@@ -6,10 +6,11 @@ curr_dir=$(cd "$(dirname "$0")";pwd)
 node_url="https://nodejs.org/dist/v14.16.1/node-v14.16.1-linux-x64.tar.xz"
 version="v14.16.1"
 distro="linux-x64"
+vim_path="$HOME/.config/nvim"
 
 
 install_nvim(){
-	yum install wget python3 python2-pip gcc autoconf automake -y
+	yum install wget python3 python2-pip gcc autoconf automake git -y
 
 	wget $url
 	chmod u+x nvim.appimage
@@ -109,7 +110,25 @@ main(){
 	install_rg
 	install_ctags
     elif [ "$1" == "install" ];then
-	echo "安装插件"
+	if [ ! -d ${vim_path}/ ];then
+	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/opt/fzf
+	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/opt/fzf.vim
+	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/opt/LeaderF
+	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/opt/nerdtree
+	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/opt/rnvimr
+	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/opt/vim-autoformat
+	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/opt/vim-commentary
+	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/opt/vim-rooter
+	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/opt/vista.vim
+
+	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/start/coc.vim
+	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/start/lightline.vim
+	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/start/onedark.vim
+	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/start/vim-buffet
+	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/start/vim-floaterm
+	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/start/vim-startify
+	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/start/vim-surround
+
     elif [ "$1" == "update" ];then
 	echo "更新插件"
     elif [ "$1" == "remove" ];then
