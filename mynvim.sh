@@ -135,6 +135,8 @@ main(){
 	cd ${curr_dir}/
 	[ ! -d $HOME/.config/nvim ] && mkdir -p $HOME/.config/nvim
 	/bin/cp -rf ${curr_dir}/pack $HOME/.config/nvim/
+	/bin/cp -rf ${curr_dir}/init.vim $HOME/.config/nvim/
+	/bin/cp -rf ${curr_dir}/config $HOME/.config/nvim/
 
     elif [ "$1" == "update" ];then
 	git submodule update --recursive
