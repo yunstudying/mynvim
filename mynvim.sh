@@ -98,7 +98,7 @@ copy_file(){
 main(){
 
     if [ $# -ne 1 ];then
-	echo "Usage: bash $0 <deploy|intsll|update|remove>"
+	echo "Usage: bash $0 <deploy|intsll|update>"
 	exit 1
     fi
 
@@ -110,29 +110,38 @@ main(){
 	install_rg
 	install_ctags
     elif [ "$1" == "install" ];then
-	if [ ! -d ${vim_path}/ ];then
-	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/opt/fzf
-	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/opt/fzf.vim
-	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/opt/LeaderF
-	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/opt/nerdtree
-	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/opt/rnvimr
-	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/opt/vim-autoformat
-	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/opt/vim-commentary
-	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/opt/vim-rooter
-	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/opt/vista.vim
+	git submodule add -f https://${github}/junegunn/fzf.git pack/plugins/opt/fzf
+	git submodule add -f https://${github}/junegunn/fzf.vim.git pack/plugins/opt/fzf.vim
+	git submodule add -f https://${github}/Yggdroot/LeaderF.git pack/plugins/opt/LeaderF
+	git submodule add -f https://${github}/preservim/nerdtree.git pack/plugins/opt/nerdtree
+	git submodule add -f https://${github}/kevinhwang91/rnvimr.git pack/plugins/opt/rnvimr
+	git submodule add -f https://${github}/vim-autoformat/vim-autoformat.git pack/plugins/opt/vim-autoformat
+	git submodule add -f https://${github}/tpope/vim-commentary.git pack/plugins/opt/vim-commentary
+	git submodule add -f https://${github}/airblade/vim-rooter.git pack/plugins/opt/vim-rooter
+	git submodule add -f https://${github}/liuchengxu/vista.vim.git pack/plugins/opt/vista.vim
 
-	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/start/coc.vim
-	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/start/lightline.vim
-	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/start/onedark.vim
-	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/start/vim-buffet
-	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/start/vim-floaterm
-	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/start/vim-startify
-	git submodule add https://${github}/scrooloose/nerdtree.git pack/plugins/start/vim-surround
+	git submodule add -f https://${github}/neoclide/coc.nvim.git pack/plugins/start/coc.vim
+	git submodule add -f https://${github}/itchyny/lightline.vim.git pack/plugins/start/lightline.vim
+	git submodule add -f https://${github}/joshdick/onedark.vim.git pack/plugins/start/onedark.vim
+	git submodule add -f https://${github}/bagrat/vim-buffet.git pack/plugins/start/vim-buffet
+	git submodule add -f https://${github}/voldikss/vim-floaterm.git pack/plugins/start/vim-floaterm
+	git submodule add -f https://${github}/mhinz/vim-startify.git pack/plugins/start/vim-startify
+	git submodule add -f https://${github}/tpope/vim-surround.git pack/plugins/start/vim-surround
+
+
+	cd pack/plugins/start/coc.vim && yarn install
+
+	
+	cd ${curr_dir}/
+	[ ! -d $HOME/.config/nvim ] && mkdir -p $HOME/.config/nvim
+	/bin/cp -rf ${curr_dir}/pack $HOME/.config/nvim/
 
     elif [ "$1" == "update" ];then
-	echo "更新插件"
-    elif [ "$1" == "remove" ];then
-	echo "卸载插件"
+	git submodule update --recursive
+
+	cd ${curr_dir}/
+	[ ! -d $HOME/.config/nvim ] && mkdir -p $HOME/.config/nvim
+	/bin/cp -rf ${curr_dir}/pack $HOME/.config/nvim/
     else
 	echo "Usage: bash $0 <deploy|intsll|update|remove>"
 	exit 1
