@@ -129,6 +129,7 @@ main(){
 	git submodule add -f https://${github}/tpope/vim-surround.git pack/plugins/start/vim-surround
 
 
+	source ~/.bashrc
 	cd pack/plugins/start/coc.vim && yarn install
 
 	
