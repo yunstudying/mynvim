@@ -13,7 +13,7 @@ set synmaxcol=2500           " Don't syntax highlight long lines
 set formatoptions+=1         " Don't break lines after a one-letter word
 set formatoptions-=t         " Don't auto-wrap text
 set formatoptions-=o         " Disable comment-continuation (normal 'o'/'O')
-set viminfo='100,n$HOME/.config/nvim/autoload/plugged/vim-startify/test/viminfo'
+set viminfo=100,n$HOME/.config/nvim/pack/plugins/start/vim-startify/test/viminfo
 if has('patch-7.3.541')
 	set formatoptions+=j       " Remove comment leader when joining lines
 endif
