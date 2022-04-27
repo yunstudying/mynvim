@@ -27,8 +27,7 @@ install_node(){
 	wget ${node_url}
 	sudo mkdir -p /usr/local/lib/nodejs
 	tar -xJvf node-$version-$distro.tar.xz -C /usr/local/lib/nodejs
-	echo "export PATH=/usr/local/lib/nodejs/node-$version-$distro/bin:$PATH" | tee -a  ~/.bashrc
-	source  ~/.bashrc
+	echo "export PATH=/usr/local/lib/nodejs/node-$version-$distro/bin:$PATH" | tee -a  /etc/profile.d/node.sh
 	npm install -g yarn
 	npm install -g neovim
 
